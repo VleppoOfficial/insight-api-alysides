@@ -1,26 +1,58 @@
-# Insight API
+# Vleppo Insight API
 
-An Alysides blockchain REST and web socket API service for [Bitcore Node](https://github.com/VleppoOfficial/bitcore-node-alysides).
+This repository contains the source code for the Alysides blockchain REST and web socket API service for [Bitcore Node](https://github.com/VleppoOfficial/bitcore-node-alysides).
 
 This is a backend-only service. If you're looking for the web frontend application, take a look at https://github.com/VleppoOfficial/insight-ui-alysides.
 
-## Getting Started
+## Installation
 
-```bashl
-npm install -g bitcore-node@latest
-bitcore-node create mynode
-cd mynode
-bitcore-node install insight-api-alysides
-bitcore-node start
-```
+This section provides full installation instructions of Insight API and all its dependencies.
+Note that the Insight UI is not covered by these instructions. Refer to https://github.com/VleppoOfficial/insight-ui-alysides/tree/generic-ui#installation for installing the Insight UI.
 
-The API endpoints will be available by default at: `http://localhost:3001/insight-api-alysides/`
+### Prerequisites
 
-## Prerequisites
+- [Bitcore Node](https://github.com/VleppoOfficial/bitcore-node-alysides)
+- A node running [Vleppo Alysides](https://github.com/VleppoOfficial/alysides)
+- GNU/Linux x86_32/x86_64, or OSX 64bit
+- Node.js v4 (use [nvm](https://github.com/nvm-sh/nvm) to manage Node.js versions)
+- ZeroMQ (libzmq3-dev for Ubuntu/Debian or zeromq on OSX)
+- ~200GB of disk storage
+- ~8GB of RAM
 
-- [Bitcore Node 3.x](https://github.com/bitpay/bitcore-node)
+### Getting Started
 
-**Note:** You can use an existing Alysides data directory, however `txindex`, `addressindex`, `timestampindex` and `spentindex` needs to be set to true in `komodo.conf`, as well as a few other additional fields.
+1. Make sure you have the correct Node.js version installed: `nvm install v4`
+    - **Note:** this command may not work immediately after installing nvm, you may need to reboot shell for changes to take effect.
+2. Make sure you have ZeroMQ installed:
+    - Linux: `sudo apt install libzmq3-dev`
+    - OSX: `brew install zeromq`
+3. Install bitcore-node-alysides:\
+  `npm install -g https://github.com/VleppoOfficial/bitcore-node-alysides`\
+  `bitcore-node create mynode`\
+  `cd mynode`
+4. Install Insight:\
+  `bitcore-node install https://github.com/VleppoOfficial/insight-api-alysides`
+5. Make sure to either setup an Alysides instance for your chain locally or have access to a running local or remote Alysides node.
+6. In the machine where Alysides is running (can be the same as where bitcore-node is set up), create or edit the "<your chain>.conf" file, located by default in ".komodo/<your chain>/". Make sure the file includes the following lines:\
+  `rpcuser=<your secure rpc user>`\
+  `rpcpassword=<your secure rpc password>`\
+  `rpcport=<your chain's rpc port>`\
+  `server=1`\
+  `txindex=1`\
+  `addressindex=1`\
+  `timestampindex=1`\
+  `spentindex=1`\
+  `zmqpubrawtx=tcp://127.0.0.1:28332`\
+  `zmqpubhashblock=tcp://127.0.0.1:28332`
+    - Make sure port 28332 is not blocked for both the bitcore-node and Alysides machines (including if both are being run on the same machine). The port number can be changed if necessary.
+7. In the mynode folder, edit the bitcore-node.json file. Make sure to specify the Alysides node's IP address in rpchost (set to 127.0.0.1 if localhost), and the correct rpcuser, rpcpassword, rpcport and zmqpubrawtx according to the same values as in the node's .conf file.
+8. Launch your Alysides node (if connected solely to a local node). 
+9. Launch Insight: `bitcore-node start`
+    - **Note:** After this, you may want to restart Alysides and use the `-reindex` launch parameter when starting Alysides again in order for Insight to successfully capture past transactions.
+
+The API endpoints will be available by default at: `http://localhost:3001/insight-api-alysides/`.
+
+## API Usage and Documentation
 
 ## Notes on Upgrading from v0.3
 
