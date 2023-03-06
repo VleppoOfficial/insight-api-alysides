@@ -1,8 +1,8 @@
 {
-  "name": "insight-api-komodo",
-  "description": "A Komodo blockchain REST and web socket API service for Bitcore Node.",
+  "name": "insight-api-alysides",
+  "description": "An Alysides blockchain REST and web socket API service for Bitcore Node.",
   "version": "0.4.3",
-  "repository": "git-ssh://git@github.com:supernetorg/insight-api-komodo.git",
+  "repository": "git-ssh://git@github.com:VleppoOfficial/insight-api-alysides.git",
   "contributors": [
     {
       "name": "Gustavo Cortez",
@@ -42,15 +42,15 @@
     }
   ],
   "bugs": {
-    "url": "https://github.com/supernetorg/insight-api-komodo/issues"
+    "url": "https://github.com/VleppoOfficial/insight-api-alysides/issues"
   },
-  "homepage": "https://github.com/supernetorg/insight-api-komodo",
+  "homepage": "https://github.com/VleppoOfficial/insight-api-alysides",
   "license": "MIT",
   "keywords": [
     "insight",
     "insight api",
     "blockchain",
-    "komodo api",
+    "alysides api",
     "blockchain api",
     "json",
     "bitcore"
@@ -65,8 +65,8 @@
   "bitcoreNode": "lib",
   "dependencies": {
     "async": "^2.6.2",
-    "bitcore-lib-komodo": "git+https://git@github.com/DeckerSU/bitcore-lib-komodo",
-    "bitcore-message-komodo": "git+https://git@github.com/DeckerSU/bitcore-message-komodo",
+    "bitcore-lib-alysides": "git+https://git@github.com/VleppoOfficial/bitcore-lib-alysides",
+    "bitcore-message-alysides": "git+https://git@github.com/VleppoOfficial/bitcore-message-alysides",
     "body-parser": "^1.13.3",
     "compression": "^1.6.1",
     "lodash": "^2.4.1",
